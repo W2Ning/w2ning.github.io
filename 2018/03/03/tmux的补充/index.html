@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="John Doe">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="John Doe">
+    
+    <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    
+    <meta name="description" content>
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>tmux的补充 · WHL&#39;blog</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href="/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href="/assets/psg.ico">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js" as="script">
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >WHL&#39;s Studio.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">tmux的补充</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>WHL's Studio.</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            tmux的补充
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2018/03/03</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h2 id="tmux的补充"><a href="#tmux的补充" class="headerlink" title="tmux的补充"></a>tmux的补充</h2><blockquote>
+<p>一个<code>tmux session(会话)</code>可以包含多个<code>window(窗口)</code>，窗口默认会充满会话界面，因此这些窗口中可以运行相关性不大的任务<br>一个<code>window</code>又可以包含多个<code>pane(面板)</code>,窗口下的面板，都处于同一个界面下，这些面板适合与性相关性高的任务，以同时观察到他们的运行情况</p>
+</blockquote>
+<p>:::alert-info</p>
+<h2 id="会话"><a href="#会话" class="headerlink" title="会话"></a>会话</h2><h3 id="新建会话"><a href="#新建会话" class="headerlink" title="新建会话"></a>新建会话</h3><blockquote>
+<p>新建一个<code>tmux session</code>，语法为<code>tmux new -s session-name</code></p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tmux <span class="comment"># 新建一个无名称的会话</span></span><br><span class="line">tmux new -s demo <span class="comment"># 新建一个名称为demo的会话</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="断开当前会话"><a href="#断开当前会话" class="headerlink" title="断开当前会话"></a>断开当前会话</h3><blockquote>
+<p>会话操作了一段时间，我希望断开会话的同时下次还能够继续的使用，可以使用<code>detach</code>命令</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tmux detach <span class="comment"># 断开当前的会话，会话存在于后台</span></span><br><span class="line"><span class="comment"># C-b + d 快捷键</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="进入之前的会话"><a href="#进入之前的会话" class="headerlink" title="进入之前的会话"></a>进入之前的会话</h3><blockquote>
+<p>断开会话后，想要接着上次留下的现场继续工作，继续要<code>attach</code>命令，语法为<code>tmux attach-session -t session-name</code>，简写为<code>tmux a -t session-name</code>或者<code>tmux a</code></p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tmux a <span class="comment"># 默认进入第一个会话</span></span><br><span class="line">tmux a -t demo <span class="comment"># 进入指定的会话</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="关闭会话"><a href="#关闭会话" class="headerlink" title="关闭会话"></a>关闭会话</h3><blockquote>
+<p>会话结束后关闭，可以使用<code>tmux</code>的<code>kill</code>命令<br>kill命令有<code>kill-pane</code>，<code>kill-server</code>，<code>kill-session</code>和<code>kill-window</code>共四种</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tmux <span class="built_in">kill</span>-session -t demo <span class="comment"># 关闭demo会话</span></span><br><span class="line">tmux <span class="built_in">kill</span>-server <span class="comment"># 关闭服务器，所有的会话都会关闭</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="查看会话"><a href="#查看会话" class="headerlink" title="查看会话"></a>查看会话</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tmux list-session <span class="comment"># 查看所有的会话</span></span><br><span class="line">tmux ls <span class="comment">#简写</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果处于会话之中，我们可以使用tmux的快捷键<code>C-b + s</code>,此时<code>tmux</code>将打开一个会话列表，可以直观的进行切换</p>
+</blockquote>
+<p>:::</p>
+<p>:::alert-info</p>
+<h2 id="Tmux快捷指令"><a href="#Tmux快捷指令" class="headerlink" title="Tmux快捷指令"></a>Tmux快捷指令</h2><blockquote>
+<p>所有的指令都有一个默认的前缀<code>C-b</code></p>
+</blockquote>
+<h3 id="系统指令"><a href="#系统指令" class="headerlink" title="系统指令"></a>系统指令</h3><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>？</td>
+<td>显示快捷键帮助文档</td>
+</tr>
+<tr>
+<td>d</td>
+<td>断开当前的会话</td>
+</tr>
+<tr>
+<td>D</td>
+<td>选择要断开的会话</td>
+</tr>
+<tr>
+<td>C-z</td>
+<td>挂起当前的会话</td>
+</tr>
+<tr>
+<td>r</td>
+<td>强制重载当前会话</td>
+</tr>
+<tr>
+<td>s</td>
+<td>显示会话列表用于选择并切换</td>
+</tr>
+<tr>
+<td>;</td>
+<td>进入命令行模式，此时可以直接输入ls等命令</td>
+</tr>
+<tr>
+<td>[</td>
+<td>进入复制模式，按q退出</td>
+</tr>
+<tr>
+<td>]</td>
+<td>粘贴复制模式中的复制的文本</td>
+</tr>
+<tr>
+<td>～</td>
+<td>列出提示信息缓存</td>
+</tr>
+</tbody></table>
+<h3 id="窗口指令"><a href="#窗口指令" class="headerlink" title="窗口指令"></a>窗口指令</h3><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>c</td>
+<td>新建窗口</td>
+</tr>
+<tr>
+<td>&amp;</td>
+<td>关闭当前的窗口</td>
+</tr>
+<tr>
+<td>0-9</td>
+<td>切换到指定的窗口</td>
+</tr>
+<tr>
+<td>p</td>
+<td>切换到上一个窗口</td>
+</tr>
+<tr>
+<td>n</td>
+<td>切换到下一个窗口</td>
+</tr>
+<tr>
+<td>w</td>
+<td>打开窗口列表，用于切换窗口</td>
+</tr>
+<tr>
+<td>，</td>
+<td>重命名当前的窗口</td>
+</tr>
+<tr>
+<td>.</td>
+<td>修改当前窗口的编号(适用于窗口的重新排序)</td>
+</tr>
+<tr>
+<td>f</td>
+<td>快速定位到窗口(输入关键字匹配窗口的名称)</td>
+</tr>
+</tbody></table>
+<h3 id="面板指令"><a href="#面板指令" class="headerlink" title="面板指令"></a>面板指令</h3><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>“</td>
+<td>将当前的面板上下一分为二</td>
+</tr>
+<tr>
+<td>%</td>
+<td>将当前的面板左右一分为二</td>
+</tr>
+<tr>
+<td>x</td>
+<td>关闭当前的面板</td>
+</tr>
+<tr>
+<td>z</td>
+<td>最大化当前的面板，再重复一次后回复正常</td>
+</tr>
+<tr>
+<td>！</td>
+<td>将当前的面板移动到新的窗口打开(原窗口存在两个以及以上的面板有效)</td>
+</tr>
+<tr>
+<td>;</td>
+<td>切换到最后一次使用的面板</td>
+</tr>
+<tr>
+<td>q</td>
+<td>显示面板编号，在编号消失前输入对应的数字可以切换到相应的面板</td>
+</tr>
+<tr>
+<td>{</td>
+<td>向前置换当前面板</td>
+</tr>
+<tr>
+<td>}</td>
+<td>向后置换当前面板</td>
+</tr>
+<tr>
+<td>C-o</td>
+<td>顺时针旋转当前窗口的所有面板</td>
+</tr>
+<tr>
+<td>方向键</td>
+<td>移动光标切换面板</td>
+</tr>
+<tr>
+<td>o</td>
+<td>选择下一个面板</td>
+</tr>
+<tr>
+<td>空格键</td>
+<td>在自带的面板布局中循环切换</td>
+</tr>
+<tr>
+<td>ALT+方向键</td>
+<td>以5个单元格为单位调整面板的边缘</td>
+</tr>
+<tr>
+<td>C+方向键</td>
+<td>以1个单元格为单位调整面板的边缘</td>
+</tr>
+<tr>
+<td>t</td>
+<td>显示一个时钟</td>
+</tr>
+<tr>
+<td>:::</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><h3 id="修改指令的前缀"><a href="#修改指令的前缀" class="headerlink" title="修改指令的前缀"></a>修改指令的前缀</h3><blockquote>
+<p>tmux的配置文件为<code>～/.tmux.conf（没有的话自行创建）</code></p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> -g prefix C<span class="_">-a</span> <span class="comment">#</span></span><br><span class="line">unbind C-b <span class="comment"># C-b即Ctrl+b键，unbind意味着解除绑定</span></span><br><span class="line"><span class="built_in">bind</span> C<span class="_">-a</span> send-prefix <span class="comment"># 绑定Ctrl+a为新的指令前缀</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 从tmux v1.6版起，支持设置第二个指令前缀</span></span><br><span class="line"><span class="built_in">set</span>-option -g prefix2 ` <span class="comment"># 设置一个不常用的`键作为指令前缀，按键更快些</span></span><br></pre></td></tr></table></figure>
+
+<p>修改配置文件有以下两种方式使其生效：</p>
+<ul>
+<li>restart tmux</li>
+<li>在tmux中，<code>C-b + :</code>进入命令模式，输入<code>source-file ~/.tmux.conf</code></li>
+</ul>
+<p>为配置文件设置一个快捷键，以便随时打开配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 绑定快捷键为r</span></span><br><span class="line"><span class="built_in">bind</span> r <span class="built_in">source</span>-file ~/.tmux.conf \; display-message <span class="string">"Config reloaded.."</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="新增面板"><a href="#新增面板" class="headerlink" title="新增面板"></a>新增面板</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">unbind <span class="string">'"'</span></span><br><span class="line"><span class="built_in">bind</span> - splitw -v -c <span class="string">'#&#123;pane_current_path&#125;'</span> <span class="comment"># 垂直方向新增面板，默认进入当前目录</span></span><br><span class="line">unbind %</span><br><span class="line"><span class="built_in">bind</span> | splitw -h -c <span class="string">'#&#123;pane_current_path&#125;'</span> <span class="comment"># 水平方向新增面板，默认进入当前目录</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="开启鼠标支持"><a href="#开启鼠标支持" class="headerlink" title="开启鼠标支持"></a>开启鼠标支持</h3><p>tmux v2.1(2015.10.28)之前的版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">setw -g mode-mouse on <span class="comment"># 支持鼠标选取文本等</span></span><br><span class="line">setw -g mouse-resize-pane on <span class="comment"># 支持鼠标拖动调整面板的大小(通过拖动面板间的分割线)</span></span><br><span class="line">setw -g mouse-select-pane on <span class="comment"># 支持鼠标选中并切换面板</span></span><br><span class="line">setw -g mouse-select-window on <span class="comment"># 支持鼠标选中并切换窗口(通过点击状态栏窗口名称)</span></span><br></pre></td></tr></table></figure>
+
+<p>tmux v2.1之后</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span>-option -g mouse on <span class="comment"># 等同于以上4个指令的效果</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="快速面板切换"><a href="#快速面板切换" class="headerlink" title="快速面板切换"></a>快速面板切换</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 绑定hjkl键为面板切换的上下左右键</span></span><br><span class="line"><span class="built_in">bind</span> -r k select-pane -U <span class="comment"># 绑定k为↑</span></span><br><span class="line"><span class="built_in">bind</span> -r j select-pane -D <span class="comment"># 绑定j为↓</span></span><br><span class="line"><span class="built_in">bind</span> -r h select-pane -L <span class="comment"># 绑定h为←</span></span><br><span class="line"><span class="built_in">bind</span> -r l select-pane -R <span class="comment"># 绑定l为→</span></span><br></pre></td></tr></table></figure>
+
+<p>-r表示可重复按键，大概500ms之内，重复的h、j、k、l按键都将有效，完美支持了快速切换的Geek需求。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bind -r e lastp # 选择最后一个面板</span><br><span class="line">bind -r ^e last # 选择最后一个窗口</span><br><span class="line"></span><br><span class="line">bind -r ^u swapp -U # 与前一个面板交换位置</span><br><span class="line">bind -r ^d swapp -D # 与后一个面板交换位置</span><br></pre></td></tr></table></figure>
+
+<h3 id="调整面板的大小"><a href="#调整面板的大小" class="headerlink" title="调整面板的大小"></a>调整面板的大小</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 绑定Ctrl+hjkl键为面板上下左右调整边缘的快捷指令</span><br><span class="line">bind -r ^k resizep -U 10 # 绑定Ctrl+k为往↑调整面板边缘10个单元格</span><br><span class="line">bind -r ^j resizep -D 10 # 绑定Ctrl+j为往↓调整面板边缘10个单元格</span><br><span class="line">bind -r ^h resizep -L 10 # 绑定Ctrl+h为往←调整面板边缘10个单元格</span><br><span class="line">bind -r ^l resizep -R 10 # 绑定Ctrl+l为往→调整面板边缘10个单元格</span><br></pre></td></tr></table></figure>
+
+<p>以上，resizep即resize-pane的别名。</p>
+<h3 id="面板最大化"><a href="#面板最大化" class="headerlink" title="面板最大化"></a>面板最大化</h3><p>v1.8 以上可以直接使用<code>tmux-prefix+z</code><br>以下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash -f</span><br><span class="line">currentwindow=`tmux list-window | tr &apos;\t&apos; &apos; &apos; | sed -n -e &apos;/(active)/s/^[^:]*: *\([^ ]*\) .*/\1/gp&apos;`;</span><br><span class="line">currentpane=`tmux list-panes | sed -n -e &apos;/(active)/s/^\([^:]*\):.*/\1/gp&apos;`;</span><br><span class="line">panecount=`tmux list-panes | wc | sed -e &apos;s/^ *//g&apos; -e &apos;s/ .*$//g&apos;`;</span><br><span class="line">inzoom=`echo $currentwindow | sed -n -e &apos;/^zoom/p&apos;`;</span><br><span class="line">if [ $panecount -ne 1 ]; then</span><br><span class="line">    inzoom=&quot;&quot;;</span><br><span class="line">fi</span><br><span class="line">if [ $inzoom ]; then</span><br><span class="line">    lastpane=`echo $currentwindow | rev | cut -f 1 -d &apos;@&apos; | rev`;</span><br><span class="line">    lastwindow=`echo $currentwindow | cut -f 2- -d &apos;@&apos; | rev | cut -f 2- -d &apos;@&apos; | rev`;</span><br><span class="line">    tmux select-window -t $lastwindow;</span><br><span class="line">    tmux select-pane -t $lastpane;</span><br><span class="line">    tmux swap-pane -s $currentwindow;</span><br><span class="line">    tmux kill-window -t $currentwindow;</span><br><span class="line">else</span><br><span class="line">    newwindowname=zoom@$currentwindow@$currentpane;</span><br><span class="line">    tmux new-window -d -n $newwindowname;</span><br><span class="line">    tmux swap-pane -s $newwindowname;</span><br><span class="line">    tmux select-window -t $newwindowname;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<p>不妨将该脚本存放在~/.tmux目录中（没有则新建目录），接下来只需要绑定一个快捷指令就行，如下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">unbind z</span><br><span class="line">bind z run &quot;. ~/.tmux/zoom&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="窗口变为面板"><a href="#窗口变为面板" class="headerlink" title="窗口变为面板"></a>窗口变为面板</h3><blockquote>
+<p>试想这样一个场景：当你打开多个窗口后，然后想将其中几个窗口合并到当前窗口中，以便对比观察输出。</p>
+</blockquote>
+<p>实际上，你的要求就是将其它窗口变成面板，然后合并到当前窗口中。对于这种操作，我们可以在当前窗口，按下prefix + :，打开命令行，然后输入如下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">join-pane -s window01 <span class="comment"># 合并名称为window01的窗口的默认（第一个）面板到当前窗口中</span></span><br><span class="line">join-pane -s window01.1 <span class="comment"># .1显式指定了第一个面板，.2就是第二个面板(我本地将面板编号起始值设置为1，默认是0)</span></span><br></pre></td></tr></table></figure>
+
+<p>每次执行join-pane命令都会合并一个面板，并且指定的窗口会减少一个面板，直到面板数量为0，窗口关闭。<br>除了在当前会话中操作外，join-pane命令甚至可以从其它指定会话中合并面板，格式为join-pane -s [session_name]:[window].[pane]，如join-pane -s 2:1.1 即合并第二个会话的第一个窗口的第一个面板到当前窗口，当目标会话的窗口和面板数量为0时，会话便会关闭。</p>
+<p>注：上一节中的swap-pane命令与join-pane语法基本一致。</p>
+<h3 id="其他的配置"><a href="#其他的配置" class="headerlink" title="其他的配置"></a>其他的配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">bind</span> m <span class="built_in">command</span>-prompt <span class="string">"splitw -h 'exec man %%'"</span>   <span class="comment"># 绑定m键为在新的panel打开man</span></span><br><span class="line"><span class="comment"># 绑定P键为开启日志功能，如下，面板的输出日志将存储到桌面</span></span><br><span class="line"><span class="built_in">bind</span> P pipe-pane -o <span class="string">"cat &gt;&gt;~/Desktop/#W.log"</span> \; display <span class="string">"Toggled logging to ~/Desktop/#W.log"</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="复制模式"><a href="#复制模式" class="headerlink" title="复制模式"></a>复制模式</h3><p>tmux中操作文本，自然离不开复制模式，通常使用复制模式的步骤如下：</p>
+<p>输入 `+[ 进入复制模式<br>按下 空格键 开始复制，移动光标选择复制区域<br>按下 回车键 复制选中文本并退出复制模式<br>按下 `+] 粘贴文本<br>查看复制模式默认的快捷键风格：</p>
+<p>tmux show-window-options -g mode-keys # mode-keys emacs</p>
+<p>默认情况下，快捷键为emacs风格。</p>
+<p>为了让复制模式更加方便，我们可以将快捷键设置为熟悉的vi风格，如下：</p>
+<p>setw -g mode-keys vi # 开启vi风格后，支持vi的C-d、C-u、hjkl等快捷键</p>
+<h3 id="自定义复制和选择快捷键"><a href="#自定义复制和选择快捷键" class="headerlink" title="自定义复制和选择快捷键"></a>自定义复制和选择快捷键</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">bind</span> Escape copy-mode <span class="comment"># 绑定esc键为进入复制模式</span></span><br><span class="line"><span class="built_in">bind</span> -t vi-copy v begin-selection <span class="comment"># 绑定v键为开始选择文本</span></span><br><span class="line"><span class="built_in">bind</span> -t vi-copy y copy-selection <span class="comment"># 绑定y键为复制选中文本</span></span><br><span class="line"><span class="built_in">bind</span> p pasteb <span class="comment"># 绑定p键为粘贴文本（p键默认用于进入上一个窗口，不建议覆盖）</span></span><br></pre></td></tr></table></figure>
+
+<p>以上，绑定 v、y两键的设置只在tmux v2.4版本以下才有效，对于v2.4及以上的版本，绑定快捷键需要使用 -T 选项，发送指令需要使用 -X 选项，请参考如下设置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bind -T copy-mode-vi v send-keys -X begin-selection</span><br><span class="line">bind -T copy-mode-vi y send-keys -X copy-selection-and-cancel</span><br></pre></td></tr></table></figure>
+
+<h3 id="buff缓存"><a href="#buff缓存" class="headerlink" title="buff缓存"></a>buff缓存</h3><p>tmux复制操作的内容默认会存进buffer里，buffer是一个粘贴缓存区，新的缓存总是位于栈顶，它的操作命令如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">tmux list-buffers <span class="comment"># 展示所有的 buffers</span></span><br><span class="line">tmux show-buffer [-b buffer-name] <span class="comment"># 显示指定的 buffer 内容</span></span><br><span class="line">tmux choose-buffer <span class="comment"># 进入 buffer 选择页面(支持jk上下移动选择，回车选中并粘贴 buffer 内容到面板上)</span></span><br><span class="line">tmux <span class="built_in">set</span>-buffer <span class="comment"># 设置buffer内容</span></span><br><span class="line">tmux load-buffer [-b buffer-name] file-path <span class="comment"># 从文件中加载文本到buffer缓存</span></span><br><span class="line">tmux save-buffer [-a] [-b buffer-name] path <span class="comment"># 保存tmux的buffer缓存到本地</span></span><br><span class="line">tmux paste-buffer <span class="comment"># 粘贴buffer内容到会话中</span></span><br><span class="line">tmux delete-buffer [-b buffer-name] <span class="comment"># 删除指定名称的buffer</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="使用系统的粘贴板"><a href="#使用系统的粘贴板" class="headerlink" title="使用系统的粘贴板"></a>使用系统的粘贴板</h3><p>需要安装<code>xclip</code></p>
+<p>然后在<code>.tmux.conf</code>中配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># buffer缓存复制到Linux系统粘贴板</span></span><br><span class="line"><span class="built_in">bind</span> C-c run <span class="string">" tmux save-buffer - | xclip -i -sel clipboard"</span></span><br><span class="line"><span class="comment"># Linux系统粘贴板内容复制到会话</span></span><br><span class="line"><span class="built_in">bind</span> C-v run <span class="string">" tmux set-buffer \"<span class="variable">$(xclip -o -sel clipboard)</span>\"; tmux paste-buffer"</span></span><br></pre></td></tr></table></figure>
+
+<p>按下prefix + Ctrl + c 键，buffer缓存的内容将通过xlip程序复制到粘贴板，按下prefix + Ctrl + v键，tmux将通过xclip访问粘贴板，然后由set-buffer命令设置给buffer缓存，最后由paste-buffer粘贴到tmux会话中。</p>
+<h2 id="Tmux优化"><a href="#Tmux优化" class="headerlink" title="Tmux优化"></a>Tmux优化</h2><p>设置窗口面板起始序号</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> -g base-index 1 <span class="comment"># 设置窗口的起始下标为1</span></span><br><span class="line"><span class="built_in">set</span> -g pane-base-index 1 <span class="comment"># 设置面板的起始下标为1</span></span><br></pre></td></tr></table></figure>
+
+<p>自定义状态栏</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> -g status-utf8 on <span class="comment"># 状态栏支持utf8</span></span><br><span class="line"><span class="built_in">set</span> -g status-interval 1 <span class="comment"># 状态栏刷新时间</span></span><br><span class="line"><span class="built_in">set</span> -g status-justify left <span class="comment"># 状态栏列表左对齐</span></span><br><span class="line">setw -g monitor-activity on <span class="comment"># 非当前窗口有内容更新时在状态栏通知</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> -g status-bg black <span class="comment"># 设置状态栏背景黑色</span></span><br><span class="line"><span class="built_in">set</span> -g status-fg yellow <span class="comment"># 设置状态栏前景黄色</span></span><br><span class="line"><span class="built_in">set</span> -g status-style <span class="string">"bg=black, fg=yellow"</span> <span class="comment"># 状态栏前景背景色</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> -g status-left <span class="string">"#[bg=#FF661D] ❐ #S "</span> <span class="comment"># 状态栏左侧内容</span></span><br><span class="line"><span class="built_in">set</span> -g status-right <span class="string">'Continuum status: #&#123;continuum_status&#125;'</span> <span class="comment"># 状态栏右侧内容</span></span><br><span class="line"><span class="built_in">set</span> -g status-left-length 300 <span class="comment"># 状态栏左边长度300</span></span><br><span class="line"><span class="built_in">set</span> -g status-right-length 500 <span class="comment"># 状态栏左边长度500</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> -wg window-status-format <span class="string">" #I #W "</span> <span class="comment"># 状态栏窗口名称格式</span></span><br><span class="line"><span class="built_in">set</span> -wg window-status-current-format <span class="string">" #I:#W#F "</span> <span class="comment"># 状态栏当前窗口名称格式(#I：序号，#w：窗口名称，#F：间隔符)</span></span><br><span class="line"><span class="built_in">set</span> -wg window-status-separator <span class="string">""</span> <span class="comment"># 状态栏窗口名称之间的间隔</span></span><br><span class="line"><span class="built_in">set</span> -wg window-status-current-style <span class="string">"bg=red"</span> <span class="comment"># 状态栏当前窗口名称的样式</span></span><br><span class="line"><span class="built_in">set</span> -wg window-status-last-style <span class="string">"fg=red"</span> <span class="comment"># 状态栏最后一个窗口名称的样式</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> -g message-style <span class="string">"bg=#202529, fg=#91A8BA"</span> <span class="comment"># 指定消息通知的前景、后景色</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="脚本化的Tmux"><a href="#脚本化的Tmux" class="headerlink" title="脚本化的Tmux"></a>脚本化的Tmux</h2><blockquote>
+<p>脚本中创建tmux会话的时候，由于不需要开启可视化界面，需要输入<code>-d</code>参数指定会话后台运行</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tmux new -s init -d <span class="comment"># 后台创建一个名字为 init 的会话</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>新建的会话，建议重命名会话的窗口名称，以便后续维护</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 重命名init会话的第一个窗口名称为service</span></span><br><span class="line">tmux rename-window -t <span class="string">"init:1"</span> service</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>发送指令</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 切换到指定目录并运行python服务</span></span><br><span class="line">tmux send -t <span class="string">"init:service"</span> <span class="string">"cd ~/workspace/language/python/;python2.7 server.py"</span> Enter</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>分个屏</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 默认上下分屏</span></span><br><span class="line">tmux split-window -t <span class="string">"init:service"</span></span><br><span class="line"><span class="comment"># 切换到指定目录并运行node服务</span></span><br><span class="line">tmux send -t <span class="string">"init:service"</span> <span class="string">'cd ~/data/node-webserver/;npm start'</span> Enter</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>创建窗口</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建一个名称为tool的窗口</span></span><br><span class="line">tmux neww -a -n tool -t init  <span class="comment"># neww等同于new window</span></span><br><span class="line"><span class="comment"># 运行weinre调试工具</span></span><br><span class="line">tmux send -t <span class="string">"init:tool"</span> <span class="string">"weinre --httpPort 8881 --boundHost -all-"</span> Enter</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tmux neww-n processes ls <span class="comment"># 新建窗口并执行命令，命令执行结束后窗口关闭</span></span><br><span class="line">tmux neww-n processes top <span class="comment"># 由于top命令持续在前台运行，因此窗口将被保留，直到top命令退出</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h2><h3 id="去掉小圆点"><a href="#去掉小圆点" class="headerlink" title="去掉小圆点"></a>去掉小圆点</h3><blockquote>
+<p>tmux 默认会同步同一个会话的操作到所有会话连接的终端窗口中，这种同步机制，限制了窗口的大小为最小的会话连接。因此当你打开一个大窗口连接会话的时候，实际窗口将自动调整为最小的那个会话连接窗口，终端剩余的空间将填充排列整齐的小圆点</p>
+</blockquote>
+<blockquote>
+<p>为了避免这种问题，我们可以在连接会话的时候，断开其他的会话连接</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tmux a -d</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果已经进入tmux会话中，才发现这种问题，这个时候可以输入命令达到同样的效果</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`:a -d</span><br></pre></td></tr></table></figure>
+
+
+    </article>
+    <!-- license  -->
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2018/05/21/NFS代码发布/" title= "NFS代码发布">
+                    <div class="nextTitle">NFS代码发布</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2018/01/13/HTML中的代码注入技巧/" title= "HTML中的代码注入技巧">
+                    <div class="prevTitle">HTML中的代码注入技巧</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:wenghanlin94@gmail.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/W2Ning" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 16
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2019 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/17</span><a class="archive-post-title" href= "/2019/08/17/被木马感染后的系统表现/" >被木马感染后的系统表现</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/10</span><a class="archive-post-title" href= "/2019/06/10/一次简单的应急/" >一次简单的应急</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/06</span><a class="archive-post-title" href= "/2019/06/06/JWT/" >JWT</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/26</span><a class="archive-post-title" href= "/2019/04/26/密码找回/" >密码找回潜在漏洞</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/26</span><a class="archive-post-title" href= "/2019/04/26/IDOR与任意密码重置/" >IDOR与任意密码重置</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/16</span><a class="archive-post-title" href= "/2019/03/16/XXE漏洞原理/" >XXE漏洞原理</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/15</span><a class="archive-post-title" href= "/2019/03/15/关于XML/" >关于XML</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/01</span><a class="archive-post-title" href= "/2018/11/01/文件包含漏洞原理/" >文件包含漏洞原理</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/21</span><a class="archive-post-title" href= "/2018/05/21/NFS代码发布/" >NFS代码发布</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/03</span><a class="archive-post-title" href= "/2018/03/03/tmux的补充/" >tmux的补充</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/13</span><a class="archive-post-title" href= "/2018/01/13/HTML中的代码注入技巧/" >HTML中的代码注入技巧</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/12</span><a class="archive-post-title" href= "/2018/01/12/AJAX/" >AJAX</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/11</span><a class="archive-post-title" href= "/2018/01/11/跨站脚本攻击/" >跨站脚本攻击</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2017 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/12</span><a class="archive-post-title" href= "/2017/12/12/pyenv+pipenv管理/" >pyenv+pipenv管理</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/07</span><a class="archive-post-title" href= "/2017/11/07/Chrome小恐龙/" >Chrome小恐龙</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/05</span><a class="archive-post-title" href= "/2017/07/05/HEXO的安装 ARCHER主题的安装/" >HEXO的安装 ARCHER主题的安装</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "John Doe"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+
