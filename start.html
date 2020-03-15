@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    input{
+        width: 340px;
+    }
+    .head{
+            width: 1000px;
+            border: solid ;
+            margin:  auto;
+    }
+    .head1{
+        float: left;
+        width: 550px;
+    }
+    .box1{
+            width: 1000px;
+            border: solid ;
+            margin: 20px auto;
+        }
+    .div1{
+        float: left;
+        width: 550px;
+
+    }
+    .box2{
+            width: 1000px;
+            border: solid ;
+            margin: 20px auto;
+        }
+    .div3{
+        float: left;
+        width: 550px;
+
+    }
+    .box3{
+            width:  1000px;
+            border: solid ;
+            margin: 20px auto;
+        } 
+    .div5{
+        float: left;
+        width: 550px;
+
+
+    }
+    .foot{
+            width:  140px;
+            margin: auto;
+        }
+
+</style>
+<body>
+    <div class="head">
+        <div class="head1">
+            <span>选择模板</span>
+            <br>
+            <input type="file" id="doc" value="file">
+            <br>
+            <span>输入Application_name：</span>
+            <br>
+            <input type="text"  id="Application_name">
+            <br>
+            <span>输入Application_ID：</span>
+            <br>
+            <input type="text"  id="Application_ID">
+            <br>
+            <span>输入Department:</span>
+            <br>
+            <input type="text"  id="Department">
+            <br>
+            <span>输入Contact_Person</span>
+            <br>
+            <input type="text"  id="Contact_Person">
+            <br>
+            <span>输入Security_Responsible_Person：</span>
+            <br>
+            <input type="text"  id="Security_Responsible_Person">
+            <br>
+            <span>输入type的数量:</span>
+            <br>
+            <select name="" id="Vul_types">
+                <option value=""></option>
+                <option value="one">one</option>
+                <option value="two">two</option>
+                <option value="three">three</option>
+                <option value="four">four</option>
+            </select>
+        </div>
+        <div class="head2">
+            <span>输入Test_Modules:</span>
+            <br>
+            <select name="" id="Test_Modules">
+                <option value=""></option>
+                <option value="Web Application">Web Application</option>
+                <option value="Moblie Application">Moblie Application</option>
+            </select>
+            <br>
+            <span>输入Test_Period:</span>
+            <br>
+            <input type="text"  id="Test_Period">
+            <br>
+            <span>输入Test_account_1:</span>
+            <br>
+            <input type="text"  id="Test_account_1">
+            <br>
+            <span>输入Test_account_1_Role:</span>
+            <br>
+            <input type="text"  id="Test_account_1_Role">
+            <br>
+            <span>输入Test_account_2:</span>
+            <br>
+            <input type="text"  id="Test_account_2">
+            <br>
+            <span>输入Test_account_2_Role:</span>
+            <br>
+            <input type="text"  id="Test_account_2_Role">
+            <br>
+            <span>输入起始URL:</span>
+            <br>
+            <input type="text"  id="System_Entry_Point">
+        </div>
+    </div>
+    <div class="box1">
+        <div class="div1">
+            <span>第1个漏洞</span>
+            <br>
+            <select  id="Vul_1_name">
+            <option value=""></option>
+            <option value="Cross-Site Scripting(Stored-xss)">Cross-Site Scripting(Stored-xss)</option>
+            <option value="Cross-Site Scripting(Reflected-xss)">Cross-Site Scripting(Reflected-xss)</option>
+            <option value="SQL Injection">SQL Injection</option>
+            <option value="Directory listing">Directory listing</option>
+            <option value="Unauthorized Access">Unauthorized Access</option>
+            <option value="Vulnerable Javascript library">Vulnerable Javascript library</option>
+            <option value="Leakage of information">Leakage of information</option>
+            <option value="SMS bomb loophole">SMS bomb loophole</option>
+            <option value="Any file upload vulnerability">Any file upload vulnerability</option>
+            <option value="Cross-Site Request Forgery (CSRF)">Cross-Site Request Forgery (CSRF)</option>
+            <option value="Open Insecure Ports">Open Insecure Ports</option>
+            <option value="Transmission of user IDs and passwords in clear text">Transmission of user IDs and passwords in clear text</option>
+            <option value="Login to bypass">Login to bypass</option>
+            <option value="Weak Password Policy">Weak Password Policy</option>
+            <option value="Clickjacking: X-Frame-Options header missing">Clickjacking: X-Frame-Options header missing</option>
+            <option value="URL redirection">URL redirection</option>
+            <option value="User enumeration">User enumeration</option>
+            <option value="Broken Access Control">Broken Access Control</option>
+            <option value="Sensitive path leakage">Sensitive path leakage</option>
+            <option value="Source code disclosure">Source code disclosure</option>
+            <option value="Improper Error Handling">Improper Error Handling</option>
+            <option value="Database information leakage">Database information leakage</option>
+            </select>
+            <br>
+                <span>第1个漏洞的Description</span>
+                <br>
+                <textarea name="" id="Vul_1_Description" cols="45" rows="5"></textarea>
+
+                <br>
+                <span>第1个漏洞的Impact</span>
+                <br>
+                <textarea name="" id="Vul_1_Impact" cols="45" rows="5"></textarea>
+
+                <br>
+                <span>第1个漏洞的URL</span>
+                <br>
+                <input type="text"  id="Vul_1_URL">
+                <br>
+                <span>第1个漏洞的Recommendation</span>
+                <br>
+                <textarea name="" id="Vul_1_Recommendation" cols="45" rows="5"></textarea>
+
+                <br>
+        </div>
+        <div class="div2">
+            <span>第2个漏洞</span>
+            <br>
+            <select  id="Vul_2_name">
+                        <option value=""></option>
+                        <option value="Cross-Site Scripting(Stored-xss)">Cross-Site Scripting(Stored-xss)</option>
+                        <option value="Cross-Site Scripting(Reflected-xss)">Cross-Site Scripting(Reflected-xss)</option>
+                        <option value="SQL Injection">SQL Injection</option>
+                        <option value="Directory listing">Directory listing</option>
+                        <option value="Unauthorized Access">Unauthorized Access</option>
+                        <option value="Vulnerable Javascript library">Vulnerable Javascript library</option>
+                        <option value="Leakage of information">Leakage of information</option>
+                        <option value="SMS bomb loophole">SMS bomb loophole</option>
+                        <option value="Any file upload vulnerability">Any file upload vulnerability</option>
+                        <option value="Cross-Site Request Forgery (CSRF)">Cross-Site Request Forgery (CSRF)</option>
+                        <option value="Open Insecure Ports">Open Insecure Ports</option>
+                        <option value="Transmission of user IDs and passwords in clear text">Transmission of user IDs and passwords in clear text</option>
+                        <option value="Login to bypass">Login to bypass</option>
+                        <option value="Weak Password Policy">Weak Password Policy</option>
+                        <option value="Clickjacking: X-Frame-Options header missing">Clickjacking: X-Frame-Options header missing</option>
+                        <option value="URL redirection">URL redirection</option>
+                        <option value="User enumeration">User enumeration</option>
+                        <option value="Broken Access Control">Broken Access Control</option>
+                        <option value="Sensitive path leakage">Sensitive path leakage</option>
+                        <option value="Source code disclosure">Source code disclosure</option>
+                        <option value="Improper Error Handling">Improper Error Handling</option>
+                        <option value="Database information leakage">Database information leakage</option>
+                    </select>
+                    <br>
+                    <span>第2个漏洞的Description</span>
+                    <br>
+                    <textarea name="" id="Vul_2_Description" cols="45" rows="5"></textarea>
+                    <br>
+                    <span>第2个漏洞的Impact</span>
+                    <br>
+                    <textarea name="" id="Vul_2_Impact" cols="45" rows="5"></textarea>
+                    <br>
+                    <span>第2个漏洞的URL</span>
+                    <br>
+                    <input type="text"  id="Vul_2_URL">
+                    <br>
+                    <span>第2个漏洞的Recommendation</span>
+                    <br>
+                    <textarea name="" id="Vul_2_Recommendation" cols="45" rows="5"></textarea>
+                
+        </div>
+    </div>
+    <div class="box2">
+        <div class="div3">
+            <span>第3个漏洞</span>
+            <br>
+            <select  id="Vul_3_name">
+            <option value=""></option>
+            <option value="Cross-Site Scripting(Stored-xss)">Cross-Site Scripting(Stored-xss)</option>
+            <option value="Cross-Site Scripting(Reflected-xss)">Cross-Site Scripting(Reflected-xss)</option>
+            <option value="SQL Injection">SQL Injection</option>
+            <option value="Directory listing">Directory listing</option>
+            <option value="Unauthorized Access">Unauthorized Access</option>
+            <option value="Vulnerable Javascript library">Vulnerable Javascript library</option>
+            <option value="Leakage of information">Leakage of information</option>
+            <option value="SMS bomb loophole">SMS bomb loophole</option>
+            <option value="Any file upload vulnerability">Any file upload vulnerability</option>
+            <option value="Cross-Site Request Forgery (CSRF)">Cross-Site Request Forgery (CSRF)</option>
+            <option value="Open Insecure Ports">Open Insecure Ports</option>
+            <option value="Transmission of user IDs and passwords in clear text">Transmission of user IDs and passwords in clear text</option>
+            <option value="Login to bypass">Login to bypass</option>
+            <option value="Weak Password Policy">Weak Password Policy</option>
+            <option value="Clickjacking: X-Frame-Options header missing">Clickjacking: X-Frame-Options header missing</option>
+            <option value="URL redirection">URL redirection</option>
+            <option value="User enumeration">User enumeration</option>
+            <option value="Broken Access Control">Broken Access Control</option>
+            <option value="Sensitive path leakage">Sensitive path leakage</option>
+            <option value="Source code disclosure">Source code disclosure</option>
+            <option value="Improper Error Handling">Improper Error Handling</option>
+            <option value="Database information leakage">Database information leakage</option>
+            </select>
+            <br>
+                <span>第3个漏洞的Description</span>
+                <br>
+                <textarea name="" id="Vul_3_Description" cols="45" rows="5"></textarea>
+        
+                <br>
+                <span>第3个漏洞的Impact</span>
+                <br>
+                <textarea name="" id="Vul_3_Impact" cols="45" rows="5"></textarea>
+        
+                <br>
+                <span>第3个漏洞的URL</span>
+                <br>
+                <input type="text"  id="Vul_3_URL">
+                <br>
+                <span>第3个漏洞的Recommendation</span>
+                <br>
+                <textarea name="" id="Vul_3_Recommendation" cols="45" rows="5"></textarea>
+        
+                <br>
+        </div>
+        <div class="div4">
+            <span>第4个漏洞</span>
+            <br>
+            <select  id="Vul_4_name">
+            <option value=""></option>
+            <option value="Cross-Site Scripting(Stored-xss)">Cross-Site Scripting(Stored-xss)</option>
+            <option value="Cross-Site Scripting(Reflected-xss)">Cross-Site Scripting(Reflected-xss)</option>
+            <option value="SQL Injection">SQL Injection</option>
+            <option value="Directory listing">Directory listing</option>
+            <option value="Unauthorized Access">Unauthorized Access</option>
+            <option value="Vulnerable Javascript library">Vulnerable Javascript library</option>
+            <option value="Leakage of information">Leakage of information</option>
+            <option value="SMS bomb loophole">SMS bomb loophole</option>
+            <option value="Any file upload vulnerability">Any file upload vulnerability</option>
+            <option value="Cross-Site Request Forgery (CSRF)">Cross-Site Request Forgery (CSRF)</option>
+            <option value="Open Insecure Ports">Open Insecure Ports</option>
+            <option value="Transmission of user IDs and passwords in clear text">Transmission of user IDs and passwords in clear text</option>
+            <option value="Login to bypass">Login to bypass</option>
+            <option value="Weak Password Policy">Weak Password Policy</option>
+            <option value="Clickjacking: X-Frame-Options header missing">Clickjacking: X-Frame-Options header missing</option>
+            <option value="URL redirection">URL redirection</option>
+            <option value="User enumeration">User enumeration</option>
+            <option value="Broken Access Control">Broken Access Control</option>
+            <option value="Sensitive path leakage">Sensitive path leakage</option>
+            <option value="Source code disclosure">Source code disclosure</option>
+            <option value="Improper Error Handling">Improper Error Handling</option>
+            <option value="Database information leakage">Database information leakage</option>
+            </select>
+            <br>
+                <span>第4个漏洞的Description</span>
+                <br>
+                <textarea name="" id="Vul_4_Description" cols="45" rows="5"></textarea>
+        
+                <br>
+                <span>第4个漏洞的Impact</span>
+                <br>
+                <textarea name="" id="Vul_4_Impact" cols="45" rows="5"></textarea>
+        
+                <br>
+                <span>第4个漏洞的URL</span>
+                <br>
+                <input type="text"  id="Vul_4_URL">
+                <br>
+                <span>第4个漏洞的Recommendation</span>
+                <br>
+                <textarea name="" id="Vul_4_Recommendation" cols="45" rows="5"></textarea>
+        
+                <br>
+        </div>
+    </div>
+    <div class="box3">
+        <div class="div5">
+            <span>第5个漏洞</span>
+            <br>
+            <select  id="Vul_5_name">
+            <option value=""></option>
+            <option value="Cross-Site Scripting(Stored-xss)">Cross-Site Scripting(Stored-xss)</option>
+            <option value="Cross-Site Scripting(Reflected-xss)">Cross-Site Scripting(Reflected-xss)</option>
+            <option value="SQL Injection">SQL Injection</option>
+            <option value="Directory listing">Directory listing</option>
+            <option value="Unauthorized Access">Unauthorized Access</option>
+            <option value="Vulnerable Javascript library">Vulnerable Javascript library</option>
+            <option value="Leakage of information">Leakage of information</option>
+            <option value="SMS bomb loophole">SMS bomb loophole</option>
+            <option value="Any file upload vulnerability">Any file upload vulnerability</option>
+            <option value="Cross-Site Request Forgery (CSRF)">Cross-Site Request Forgery (CSRF)</option>
+            <option value="Open Insecure Ports">Open Insecure Ports</option>
+            <option value="Transmission of user IDs and passwords in clear text">Transmission of user IDs and passwords in clear text</option>
+            <option value="Login to bypass">Login to bypass</option>
+            <option value="Weak Password Policy">Weak Password Policy</option>
+            <option value="Clickjacking: X-Frame-Options header missing">Clickjacking: X-Frame-Options header missing</option>
+            <option value="URL redirection">URL redirection</option>
+            <option value="User enumeration">User enumeration</option>
+            <option value="Broken Access Control">Broken Access Control</option>
+            <option value="Sensitive path leakage">Sensitive path leakage</option>
+            <option value="Source code disclosure">Source code disclosure</option>
+            <option value="Improper Error Handling">Improper Error Handling</option>
+            <option value="Database information leakage">Database information leakage</option>
+            </select>
+            <br>
+                <span>第5个漏洞的Description</span>
+                <br>
+                <textarea name="" id="Vul_5_Description" cols="45" rows="5"></textarea>
+        
+                <br>
+                <span>第5个漏洞的Impact</span>
+                <br>
+                <textarea name="" id="Vul_5_Impact" cols="45" rows="5"></textarea>
+        
+                <br>
+                <span>第5个漏洞的URL</span>
+                <br>
+                <input type="text"  id="Vul_5_URL">
+                <br>
+                <span>第5个漏洞的Recommendation</span>
+                <br>
+                <textarea name="" id="Vul_5_Recommendation" cols="45" rows="5"></textarea>
+        
+                <br>
+        </div>
+        <div class="div6">
+            <span>第6个漏洞</span>
+            <br>
+            <select  id="Vul_6_name">
+            <option value=""></option>
+            <option value="Cross-Site Scripting(Stored-xss)">Cross-Site Scripting(Stored-xss)</option>
+            <option value="Cross-Site Scripting(Reflected-xss)">Cross-Site Scripting(Reflected-xss)</option>
+            <option value="SQL Injection">SQL Injection</option>
+            <option value="Directory listing">Directory listing</option>
+            <option value="Unauthorized Access">Unauthorized Access</option>
+            <option value="Vulnerable Javascript library">Vulnerable Javascript library</option>
+            <option value="Leakage of information">Leakage of information</option>
+            <option value="SMS bomb loophole">SMS bomb loophole</option>
+            <option value="Any file upload vulnerability">Any file upload vulnerability</option>
+            <option value="Cross-Site Request Forgery (CSRF)">Cross-Site Request Forgery (CSRF)</option>
+            <option value="Open Insecure Ports">Open Insecure Ports</option>
+            <option value="Transmission of user IDs and passwords in clear text">Transmission of user IDs and passwords in clear text</option>
+            <option value="Login to bypass">Login to bypass</option>
+            <option value="Weak Password Policy">Weak Password Policy</option>
+            <option value="Clickjacking: X-Frame-Options header missing">Clickjacking: X-Frame-Options header missing</option>
+            <option value="URL redirection">URL redirection</option>
+            <option value="User enumeration">User enumeration</option>
+            <option value="Broken Access Control">Broken Access Control</option>
+            <option value="Sensitive path leakage">Sensitive path leakage</option>
+            <option value="Source code disclosure">Source code disclosure</option>
+            <option value="Improper Error Handling">Improper Error Handling</option>
+            <option value="Database information leakage">Database information leakage</option>
+            </select>
+            <br>
+                <span>第6个漏洞的Description</span>
+                <br>
+                <textarea name="" id="Vul_6_Description" cols="45" rows="5"></textarea>
+        
+                <br>
+                <span>第6个漏洞的Impact</span>
+                <br>
+                <textarea name="" id="Vul_6_Impact" cols="45" rows="5"></textarea>
+        
+                <br>
+                <span>第6个漏洞的URL</span>
+                <br>
+                <input type="text"  id="Vul_6_URL">
+                <br>
+                <span>第6个漏洞的Recommendation</span>
+                <br>
+                <textarea name="" id="Vul_6_Recommendation" cols="45" rows="5"></textarea>
+        
+                <br>
+        </div>
+    </div>
+    <div class="foot"><button  onclick="generate()">Generate document</button></div>
+</body>
+
+<script src="docxtemplater.js"></script>
+<script src="pizzip.js"></script>
+<script src="FileSaver.js"></script>
+<script src="pizzip-utils.js"></script>
+<script src="main.js"></script>
+
+</html>
