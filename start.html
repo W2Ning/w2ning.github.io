@@ -9,6 +9,12 @@
     input{
         width: 340px;
     }
+    .start_time{
+        width: 200px;
+    }
+    .end_time{
+        width: 200px;
+    }
     .head{
             width: 1000px;
             border: solid ;
@@ -82,7 +88,7 @@
             <br>
             <input type="text"  id="Security_Responsible_Person">
             <br>
-            <span>输入type的数量:</span>
+            <span>选择type的数量:</span>
             <br>
             <select name="" id="Vul_types">
                 <option value=""></option>
@@ -91,9 +97,13 @@
                 <option value="three">three</option>
                 <option value="four">four</option>
             </select>
+            <br>
+            <br>
+
+
         </div>
         <div class="head2">
-            <span>输入Test_Modules:</span>
+            <span>选择Test_Modules:</span>
             <br>
             <select name="" id="Test_Modules">
                 <option value=""></option>
@@ -101,9 +111,10 @@
                 <option value="Moblie Application">Moblie Application</option>
             </select>
             <br>
-            <span>输入Test_Period:</span>
+            <span>选择起始日期</span>
             <br>
-            <input type="text"  id="Test_Period">
+            <input type="date"  id="start_time" class="start_time">
+            <input type="date"  id="end_time" class="end_time">
             <br>
             <span>输入Test_account_1:</span>
             <br>
@@ -111,7 +122,11 @@
             <br>
             <span>输入Test_account_1_Role:</span>
             <br>
-            <input type="text"  id="Test_account_1_Role">
+            <select name="" id="Test_account_1_Role">
+                <option value=""></option>
+                <option value="Admin">Amin</option>
+                <option value="User">User</option>
+            </select>
             <br>
             <span>输入Test_account_2:</span>
             <br>
@@ -119,7 +134,11 @@
             <br>
             <span>输入Test_account_2_Role:</span>
             <br>
-            <input type="text"  id="Test_account_2_Role">
+            <select name="" id="Test_account_2_Role">
+                <option value=""></option>
+                <option value="Admin">Amin</option>
+                <option value="User">User</option>
+            </select>
             <br>
             <span>输入起始URL:</span>
             <br>
