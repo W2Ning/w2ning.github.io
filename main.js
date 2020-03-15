@@ -1,5 +1,6 @@
 var docs = document.getElementById('doc');
 
+
 function generate() {
     var reader = new FileReader();
 if (docs.files.length === 0) {
@@ -30,7 +31,7 @@ reader.onload = function (evt) {
             Security_Responsible_Person: Security_Responsible_Person.value,
             Vul_types : Vul_types.value,
             Test_Modules : Test_Modules.value,
-            Test_Period : Test_Period.value,
+            Test_Period : start_time.value + "-" + end_time.value,
             Test_account_1 : Test_account_1.value,
             Test_account_1_Role : Test_account_1_Role.value,
             Test_account_2 : Test_account_2.value,
@@ -80,6 +81,9 @@ reader.onload = function (evt) {
             type:"blob",
             mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
         }) //Output the document using Data-URI
-        saveAs(out,"output.docx")
+        
+        var filename = "Penetration Test for BMW "+ Application_name.value +" "+ end_time.value +" .docx"
+
+        saveAs(out,filename)
     }
 }
