@@ -12,19 +12,19 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta name="author" content="John Doe">
+    <meta name="author" content="W2Ning">
     <meta name="renderer" content="webkit">
-    <meta name="copyright" content="John Doe">
+    <meta name="copyright" content="W2Ning">
     
         <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
     
     <meta name="description" content="">
     <meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/archives/index.html">
+<meta property="og:url" content="https://w2ning.github.io/archives/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:locale" content="en_US">
-<meta property="article:author" content="John Doe">
+<meta property="article:author" content="W2Ning">
 <meta name="twitter:card" content="summary">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -454,6 +454,7 @@
         
         
             
+            
         
         <article class="index-post">
             <a class="abstract-title" href="/2021/12/09/MonoX-Vul-Poc/">
@@ -461,17 +462,9 @@
                 <span class="abstract-title-text">MonoX_Vul_Poc</span>
             </a>
             <div class="abstract-content">
-                MonoX被攻击事件的分析和复现攻击事件的分析
-部署即攻击版完整代码
-步骤拆分版完整代码
-核心攻击代码
-注意下面的代码缺少Interface, 不能直接复制
-所有的攻击步骤都在构造函数constructor()中实现, 也就是说当合约部署完成,攻击也已经完成
-本次复现仅做原理性验证, 攻击者通过闪电贷来避免滑点,实现利益最大化
-但其实不调用闪电贷,攻击的主要步骤也已经完成,所以攻击者的后续操作就没有再跟进
-POC只尝试从池子中拿走400万USDC,就结束了攻击
-
-123456789101112131415161718192021222324252627282930313233343536...
+                <h2 id="MonoX被攻击事件的分析和复现"><a href="#MonoX被攻击事件的分析和复现" class="headerlink" title="MonoX被攻击事件的分析和复现"></a>MonoX被攻击事件的分析和复现</h2><p><a target="_blank" rel="noopener" href="https://github.com/W2Ning/MonoX_Vul_/blob/main/MonoX%E6%94%BB%E5%87%BB%E4%BA%8B%E4%BB%B6%E5%88%86%E6%9E%90.md">攻击事件的分析</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/W2Ning/MonoX_Vul_/blob/main/poc.sol">部署即攻击版完整代码</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/W2Ning/MonoX_Vul_/blob/main/Step_By_Step.sol">步骤拆分版完整代码</a></p>
             </div>
             <!-- read more -->
             
@@ -490,6 +483,7 @@ POC只尝试从池子中拿走400万USDC,就结束了攻击
         
         
         
+            
             
         
         <article class="index-post">
@@ -498,14 +492,7 @@ POC只尝试从池子中拿走400万USDC,就结束了攻击
                 <span class="abstract-title-text">Compound_Bug_Analysis</span>
             </a>
             <div class="abstract-content">
-                概述9月29日 Compound的62号提案正式实施,Unitroller代理合约指向了新的逻辑合约Comptroller,该逻辑合约引入了巨大的奖励分发BUG,1亿4千万美金的CompoundToken受影响，光荣地冲到了Rekt排行榜第二的位置.
-
-事件发生后, Compound紧急提出了63号提案,试图暂停所有奖励发放, 大股东A16z秒投赞成票,而UC Berkeley的区块链实验室则投了反对票.
-
-
-一开始我还以为这只是一家坐落在伯克利的投资机构，但是这个edu的根域名可太秀了1https://blockchain.berkeley.edu/
-
-但即使这一提案通过也无法弥补过失...
+                <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>9月29日 Compound的62号提案正式实施,<code>Unitroller</code>代理合约指向了新的逻辑合约<code>Comptroller</code>,<br>该逻辑合约引入了巨大的奖励分发BUG,1亿4千万美金的CompoundToken受影响，<br>光荣地冲到了Rekt排行榜第二的位置.</p>
             </div>
             <!-- read more -->
             
@@ -524,6 +511,7 @@ POC只尝试从池子中拿走400万USDC,就结束了攻击
         
         
         
+            
             
         
         <article class="index-post">
@@ -532,17 +520,8 @@ POC只尝试从池子中拿走400万USDC,就结束了攻击
                 <span class="abstract-title-text">Cream_8_30_Vul_Poc</span>
             </a>
             <div class="abstract-content">
-                概述上个月8月30日， Cream Finance 又双叒叕遭到了攻击，损失超 1800 万美元。
-漏洞原理用一句话概括：Cream的借贷经济模型未能考虑到ERC777Token的勾子函数所带来的重入风险
-事件分析
-攻击者地址
-10xce1f4b4f17224ec6df16eeb1e3e5321c54ff6ede
-其中一次攻击的交易哈希(既然大家都选这次分析我也选这次复现好了)
-10xa9a1b8ea288eb9ad315088f17f7c7386b9989c95b4d13c81b69d5ddad7ffe61e
-该攻击发生的块高度
-113125071 
-
-攻击合约A10x38c40427...
+                <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>上个月8月30日， Cream Finance 又双叒叕遭到了攻击，损失超 1800 万美元。</p>
+<p>漏洞原理用一句话概括：<code>Cream的借贷经济模型未能考虑到ERC777Token的勾子函数所带来的重入风险</code></p>
             </div>
             <!-- read more -->
             
@@ -561,6 +540,7 @@ POC只尝试从池子中拿走400万USDC,就结束了攻击
         
         
         
+            
             
         
         <article class="index-post">
@@ -569,27 +549,7 @@ POC只尝试从池子中拿走400万USDC,就结束了攻击
                 <span class="abstract-title-text">XSURGE_Vul_Poc</span>
             </a>
             <div class="abstract-content">
-                概述
-8 月 17 日,BSC上的XSURGE被攻击。攻击者利用闪电贷+重入攻击反复低买高卖，导致项目损失约500万美金。
-
-事件分析
-攻击合约
-10x59c686272e6f11dC8701A162F938fb085D940ad3
-攻击交易
-
-
-10x7e2a6ec08464e8e0118368cb933dc64ed9ce36445ecf9c49cacb970ea78531d2
-
-
-
-被攻击合约同时也是SurgeToekn合约地址
-
-10xE1E1Aa58983F6b8eE8E4eCD206ceA6578F036c21
-
-
-
-攻击流程
-第一步 从Pancake 通过闪电贷借出 1000...
+                <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>8 月 17 日,BSC上的XSURGE被攻击。<br>攻击者利用<code>闪电贷+重入攻击</code>反复低买高卖，<br>导致项目损失约500万美金。</p>
             </div>
             <!-- read more -->
             
@@ -609,6 +569,7 @@ POC只尝试从池子中拿走400万USDC,就结束了攻击
         
         
             
+            
         
         <article class="index-post">
             <a class="abstract-title" href="/2021/12/09/DODO-Vul-Poc/">
@@ -616,15 +577,9 @@ POC只尝试从池子中拿走400万USDC,就结束了攻击
                 <span class="abstract-title-text">DODO_Vul_Poc</span>
             </a>
             <div class="abstract-content">
-                
-概述2021年3月,去中心化交易平台 DODO被黑客攻击，仅仅 wCRES/USDT V2 一个交易对就被转走价值近 98 万美元的 wCRES 和近 114 万美元的 USDT.
-漏洞原理其实比较简单，一句话描述就是Init函数为Public且可被多次调用.
-但精彩的地方在于,攻击者并没有成功拿到超200万美金的赃款,而是被Front Running Bot截了胡.
-事件分析
-攻击合约
-10x910FD17B9Bfc42A6eEA822912f036EF5a080Be8A
-攻击交易
-10x395675b56370a9f5fe8b32badfa80043f5291443bd6c8273...
+                <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>2021年3月,去中心化交易平台 DODO被黑客攻击，仅仅 wCRES/USDT V2 一个交易对就被转走价值近 98 万美元的 wCRES 和近 114 万美元的 USDT.</p>
+<p>漏洞原理其实比较简单，一句话描述就是<code>Init函数为Public且可被多次调用</code>.</p>
+<p>但精彩的地方在于,攻击者并没有成功拿到超200万美金的赃款,而是被Front Running Bot截了胡.</p>
             </div>
             <!-- read more -->
             
@@ -875,9 +830,9 @@ POC只尝试从池子中拿走400万USDC,就结束了攻击
         <!-- site-meta -->
         <script>
     var siteMeta = {
-        url: "http://example.com",
+        url: "https://w2ning.github.io",
         root: "/",
-        author: "John Doe"
+        author: "W2Ning"
     }
 </script>
 
