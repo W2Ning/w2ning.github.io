@@ -457,6 +457,62 @@
             
         
         <article class="index-post">
+            <a class="abstract-title" href="/2021/12/30/Visor-Finance-Vul-Poc/">
+                
+                <span class="abstract-title-text">Visor_Finance_Vul_Poc</span>
+            </a>
+            <div class="abstract-content">
+                <h2 id="事件分析"><a href="#事件分析" class="headerlink" title="事件分析"></a>事件分析</h2><ul>
+<li>攻击交易</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0x69272d8c84d67d1da2f6425b339192fa472898dce936f24818fda415c1c1ff3f</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>攻击发生的块高度</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">13849007 </span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>攻击步骤</li>
+</ul>
+<ol>
+<li><p>调用<code>RewardsHypervisor</code>的<code>deposit</code>函数, 传入参数为：</p>
+<ol>
+<li>质押数量： 100000000000000000000000000</li>
+<li>From 地址： 攻击合约自己的地址</li>
+<li>To 地址: 攻击者的EOA地址</li>
+</ol>
+</li>
+<li><p> 第一步操作会回调攻击合约的<code>owner</code>函数, 攻击合约的返回值为: 攻击合约自己的地址</p>
+</li>
+<li><p>第一步操作还会再次回调攻击合约的<code>delegatedTransferERC20</code>函数, 导致重入攻击<br> 在<code>delegatedTransferERC20</code>函数中, 攻击合约再次调用<code>RewardsHypervisor</code>的<code>deposit</code>函数,传入参数与第一步相同<br> (这一步我在POC中省略了)</p>
+</li>
+<li><p>绕过<code>require(IVisor(from).owner() == msg.sender)</code>的检测后, <code>RewardsHypervisor</code>合约给攻击者的EOA地址铸造了<br> <code>97624975481815716136709737</code>个<code>vVISR</code></p>
+</li>
+</ol>
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2021/12/30">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/12/30</span>
+                </div>
+                <!-- tags -->
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+            
+        
+        <article class="index-post">
             <a class="abstract-title" href="/2021/12/09/MonoX-Vul-Poc/">
                 
                 <span class="abstract-title-text">MonoX_Vul_Poc</span>
@@ -716,7 +772,18 @@
         
         
         
+        
+        
+        
+        
+        
     
+        
+        
+        
+        
+        
+        
         
         
         
@@ -743,7 +810,7 @@
     
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 6
+        Total : 7
         </div>
         <!-- search  -->
         
@@ -772,6 +839,12 @@
             <div class="archive-year"> 2021 </div>
             <ul class="year-list">
             
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/30</span>
+            <a class="archive-post-title" href="/2021/12/30/Visor-Finance-Vul-Poc/">Visor_Finance_Vul_Poc</a>
+        </li>
+    
         
         <li class="archive-post-item">
             <span class="archive-post-date">12/09</span>

